@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -47,15 +48,19 @@ public class Song {
 	
 	private Integer streamCount=0;
 	
-	@JsonIgnore
-	@ManyToOne(cascade = CascadeType.ALL)
-	private Category category;
-	
-	@JsonIgnore
-	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<Singer> singers  = new LinkedHashSet<>();
-	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Comment> comments = new ArrayList<>();
+//	@Lob
+//    @Column(name = "songdata", length = 1000)
+//    private byte[] songData;
+//	
+//	@JsonIgnore
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	private Category category;
+//	
+//	@JsonIgnore
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	private Set<Singer> singers  = new LinkedHashSet<>();
+//	
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private List<Comment> comments = new ArrayList<>();
 	
 }

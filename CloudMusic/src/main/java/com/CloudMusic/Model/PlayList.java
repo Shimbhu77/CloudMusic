@@ -30,7 +30,7 @@ public class PlayList {
 	
 	private Integer userId;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private Set<Song> songs = new LinkedHashSet<>();
+//	@OneToMany(cascade = CascadeType.ALL)
+//	private Set<Song> songs = new LinkedHashSet<>();
 	
 }

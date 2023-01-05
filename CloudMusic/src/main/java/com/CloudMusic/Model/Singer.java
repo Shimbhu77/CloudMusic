@@ -34,7 +34,7 @@ public class Singer {
 	@Size(min = 3 , max= 100 ,message = "Enter Singer Description which has at least three characters and maximum 100 characters ")
 	private String bio;
 	
-	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "singers")
-	private Set<Song> songs  = new LinkedHashSet<>();
+//	@ManyToMany(cascade = CascadeType.ALL,mappedBy = "singers")
+//	private Set<Song> songs  = new LinkedHashSet<>();
 	
 }
