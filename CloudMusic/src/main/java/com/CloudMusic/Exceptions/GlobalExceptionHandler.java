@@ -42,9 +42,9 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<ErrorDetails> myExceptionHandler(MethodArgumentNotValidException pe)
 	{
 		ErrorDetails err  = new ErrorDetails();
-		err.setDescription(pe.getFieldError().getDefaultMessage());
+		err.setDescription("getting Error");
 		err.setTimestamp(LocalDateTime.now());
-		err.setMessage(pe.getMessage());
+		err.setMessage(pe.getFieldError().getDefaultMessage());
 		
 		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
 		

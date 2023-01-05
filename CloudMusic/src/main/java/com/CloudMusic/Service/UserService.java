@@ -9,7 +9,7 @@ import com.CloudMusic.Model.DTO.UserDTO3;
 public interface UserService {
 
 	public User registerUser(UserDTO1 user) throws UserException;
-	public User loginUser(UserDTO2 user) throws UserException;
-	public User viewMyAccount() throws UserException;
+	public User getCurrentLoggedInUser() throws UserException;
 	public User updateMyAccount(UserDTO3 user) throws UserException;
+	public User updateMyPassword(UserDTO2 user) throws UserException;
 }
