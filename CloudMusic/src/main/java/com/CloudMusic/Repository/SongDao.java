@@ -8,4 +8,5 @@ import com.CloudMusic.Model.Song;
 @Repository
 public interface SongDao extends JpaRepository<Song, Integer>{
 
+	public Song findByName(String name);
 }

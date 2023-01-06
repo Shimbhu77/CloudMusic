@@ -1,30 +1,35 @@
 package com.CloudMusic.Model;
 
+import java.time.LocalDateTime;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Comment {
+public class Creator {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer commentId;
-	
-	@Size(min = 3 , max= 100 ,message = "Enter comment  which has at least three characters and maximum 100 characters ")
-	private String body;
+	private Integer creatorId;
 	
 	private Integer userId;
 	
-	private Integer songId;
+	private LocalDateTime uploadTime;
 	
+	private LocalDateTime updateTime;
+	
+    private Integer songId;
+	
+	private Integer categoryId;
 }

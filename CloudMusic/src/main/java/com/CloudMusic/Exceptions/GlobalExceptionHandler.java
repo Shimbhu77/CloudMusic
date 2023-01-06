@@ -38,6 +38,18 @@ public class GlobalExceptionHandler {
 		
 	}
 	
+	@ExceptionHandler(CategoryException.class)
+	public ResponseEntity<ErrorDetails> myExceptionHandler(CategoryException pe , WebRequest req)
+	{
+		ErrorDetails err  = new ErrorDetails();
+		err.setDescription(req.getDescription(false));
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(pe.getMessage());
+		
+		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
+		
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorDetails> myExceptionHandler(MethodArgumentNotValidException pe)
 	{

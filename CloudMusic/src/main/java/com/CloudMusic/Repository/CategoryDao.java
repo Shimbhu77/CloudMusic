@@ -8,4 +8,5 @@ import com.CloudMusic.Model.Category;
 @Repository
 public interface CategoryDao extends JpaRepository<Category, Integer>{
 
+	public Category findByTitle(String title);
 }

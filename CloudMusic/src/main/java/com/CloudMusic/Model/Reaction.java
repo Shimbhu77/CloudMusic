@@ -28,7 +28,6 @@ public class Reaction {
 	
 	private Boolean like;
 	
-	@NotNull
 	private Integer userId;
 	
 //	@OneToMany(cascade = CascadeType.ALL)
