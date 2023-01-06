@@ -17,6 +17,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests( (auth) ->
 		  auth.antMatchers("/cloudmusic/home/update-account","/cloudmusic/home/update-password","/cloudmusic/user/portal","/cloudmusic/home/view-my-account").authenticated()
 		  .antMatchers("/cloudmusic/admin/portal").hasRole("Admin")
+		  .antMatchers("/cloudmusic/home/user/upload-songs","/cloudmusic/home/user/song/{name}").authenticated()
 		  .antMatchers("/cloudmusic/home","/cloudmusic/home/register").permitAll()
 				).csrf().disable().httpBasic();
 		
