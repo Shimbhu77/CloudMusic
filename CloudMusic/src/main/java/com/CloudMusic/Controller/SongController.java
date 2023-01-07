@@ -52,6 +52,8 @@ public class SongController {
 
 		byte[] song = songService.viewSong(name);
 		
+		System.out.println("song is written and view *************++++++++++++^^^^^^^^^^^^");
+		
 		 return ResponseEntity.status(HttpStatus.OK)
 	                .contentType(MediaType.valueOf("video/mp4"))
 	                .body(song);

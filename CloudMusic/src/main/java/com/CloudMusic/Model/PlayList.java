@@ -28,6 +28,8 @@ public class PlayList {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer playListId;
 	
+    private String playListName;
+	
 	private Integer userId;
 	
 	@OneToMany(cascade = CascadeType.ALL)

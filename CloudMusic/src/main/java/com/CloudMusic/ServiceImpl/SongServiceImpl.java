@@ -62,13 +62,6 @@ public class SongServiceImpl implements SongService {
 		}
 		
 		
-//		System.out.println("*************************** "+f.getAbsolutePath());
-//		System.out.println("*************************** "+f.getPath());
-//		System.out.println("************==========********* "+filePath);
-//		
-//		System.out.println("+++++++++++++++"+file.getContentType());
-//		System.out.println("================="+file.getOriginalFilename());
-		
 		Song newsong = songDao.save(Song.builder()
 				.name(file.getOriginalFilename())
 				.type(file.getContentType())
@@ -81,13 +74,20 @@ public class SongServiceImpl implements SongService {
 		
 		if(newsong != null)
 		{
-//			
+			
 //			for(String str : dto.getSingers())
 //			{
-//				Singer singer =singerDao.findByFullName(str);
-//				Set<Song> songsList = singer.getSongs().add(newsong);
+//				Singer singer = singerDao.findByFullName(str);
+//				
+//				Set<Song> songs = singer.getSongs();
+//			
+//				songs.add(newsong);
+//				
+//				singerDao.save(singer);
 //				
 //			}
+			
+			
 			
 			return newsong;
 		}
@@ -125,11 +125,26 @@ public class SongServiceImpl implements SongService {
 		
 		Song song = songDao.findByName(name);
 		
-		String filePath = song.getFilePath();
+		if(song!=null)
+		{
 		
-		byte[] file = Files.readAllBytes(new File(filePath).toPath());
+			String filePath = song.getFilePath();
+			
+			int views = song.getViews();
+			
+			views++;
+			
+			song.setViews(views);
+			
+			songDao.save(song);
+			
+			
+			byte[] file = Files.readAllBytes(new File(filePath).toPath());
+			
+			return file;
+		}
 		
-		return file;
+		throw new SongException("No song found with this nane : "+name);
 	}
 
 }
