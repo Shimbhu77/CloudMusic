@@ -33,6 +33,6 @@ public class Category {
 	@Size(min = 3 , max= 100 ,message = "Enter Category description which has at least three characters and maximum 100 characters")
 	private String description;
 	
-	@OneToMany(cascade = CascadeType.ALL,mappedBy = "category")
+	@OneToMany(cascade = CascadeType.ALL)
 	private Set<Song> songs = new LinkedHashSet<>();
 }
