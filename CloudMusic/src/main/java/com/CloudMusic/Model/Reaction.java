@@ -1,6 +1,8 @@
 package com.CloudMusic.Model;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,23 +16,24 @@ import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-//@Entity
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reaction {
 
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer reactionId;
 	
-	private Boolean like;
+	private Boolean likeSong;
 	
 	private Integer userId;
 	
-//	@OneToMany(cascade = CascadeType.ALL)
-//	private Set<Song> songs = new LinkedHashSet<>();
 	
+	@OneToMany
+	private List<Song> songs  = new ArrayList<>();
 }

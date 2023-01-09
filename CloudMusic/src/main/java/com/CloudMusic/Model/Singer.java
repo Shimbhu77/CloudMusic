@@ -1,6 +1,8 @@
 package com.CloudMusic.Model;
 
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,7 +22,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
 public class Singer {
 
 	@Id
@@ -35,6 +36,6 @@ public class Singer {
 	private String bio;
 	
 	@ManyToMany(cascade = CascadeType.ALL)
-	private Set<Song> songs  = new LinkedHashSet<>();
+	private List<Song> songs  = new LinkedList<>();
 	
 }

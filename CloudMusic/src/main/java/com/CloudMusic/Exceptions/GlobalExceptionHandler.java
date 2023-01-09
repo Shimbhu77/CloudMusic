@@ -24,6 +24,30 @@ public class GlobalExceptionHandler {
 		
 	}
 	
+	@ExceptionHandler(ReactionException.class)
+	public ResponseEntity<ErrorDetails> myExceptionHandler(ReactionException pe , WebRequest req)
+	{
+		ErrorDetails err  = new ErrorDetails();
+		err.setDescription(req.getDescription(false));
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(pe.getMessage());
+		
+		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
+		
+	}
+	
+	@ExceptionHandler(ChennalException.class)
+	public ResponseEntity<ErrorDetails> myExceptionHandler(ChennalException pe , WebRequest req)
+	{
+		ErrorDetails err  = new ErrorDetails();
+		err.setDescription(req.getDescription(false));
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(pe.getMessage());
+		
+		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
+		
+	}
+	
 	
 	
 	@ExceptionHandler(SongException.class)

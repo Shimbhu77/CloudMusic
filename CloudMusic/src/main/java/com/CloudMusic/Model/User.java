@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -60,6 +61,12 @@ public class User {
 //            message = "password must contain atleast 1 uppercase, 1 lowercase, 1 special character and 1 digit ")
 //	@Size(min = 6,max = 12,message = "password should have 6 to  12  characters")
 	private String password;
+	
+	@OneToOne
+	private Chennal chennal;
+	
+	@OneToOne
+	private Reaction reaction;
 	
 	
 	

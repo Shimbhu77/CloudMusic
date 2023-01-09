@@ -1,5 +1,6 @@
 package com.CloudMusic.Model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -52,6 +53,8 @@ public class Song {
 	
 	private Integer views;
 	
+	private Integer likes;
+	
 //	@Lob
 //    @Column(name = "songdata", length = 1000)
 //    private byte[] songData;
@@ -62,11 +65,20 @@ public class Song {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Category category;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Singer> singers  = new LinkedList<>();
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Comment> comments = new ArrayList<>();
+	
+	@JsonIgnore
+	@ManyToOne
+	private Chennal chennal;
+	
+    private LocalDateTime uploadTime;
+	
+	private LocalDateTime updateTime;
 	
 }
