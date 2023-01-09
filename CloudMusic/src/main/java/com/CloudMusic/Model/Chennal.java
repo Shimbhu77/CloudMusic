@@ -1,18 +1,18 @@
 package com.CloudMusic.Model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,17 +23,25 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reaction {
+public class Chennal {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer reactionId;
+	@GeneratedValue(strategy = GenerationType.AUTO) 
+	private Integer channelId;
 	
-	private Boolean likeSong;
+	@JsonIgnore
+	@OneToOne
+	private User user;
 	
-	private Integer userId;
+	private String chennalName;
 	
+	private String description;
+	
+	private LocalDateTime CreationTime;
+	
+	private LocalDateTime updateTime;
 	
 	@OneToMany
-	private List<Song> songs  = new ArrayList<>();
+	private List<Song> songs = new ArrayList<>();
+
 }
