@@ -1,6 +1,7 @@
 package com.CloudMusic.Model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -62,13 +64,14 @@ public class User {
 //	@Size(min = 6,max = 12,message = "password should have 6 to  12  characters")
 	private String password;
 	
-	@OneToOne
+	@OneToOne(cascade =  CascadeType.ALL)
 	private Chennal chennal;
 	
-	@OneToOne
+	@OneToOne(cascade =  CascadeType.ALL)
 	private Reaction reaction;
 	
-	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<PlayList> playLists = new LinkedList<>();
 	
 	
 }

@@ -49,25 +49,59 @@ public class ReactionServiceImpl implements ReactionService {
 		
 		Optional<Song> optSong = songDao.findById(songId);
 		
+		
+		
 		if(optSong.isPresent())
 		{
 		   Song song  = optSong.get();
+		   
+		   if(user.getReaction()!=null)
+		   {
+
+			  // System.out.println("+++++++++++++++++++++++++++++");
+			   for(Song s : user.getReaction().getSongs())
+			   {
+				   if(s.getSongId()==song.getSongId())
+				   {
+					//   System.out.println("*** user already like ************************");
+					   throw new ReactionException("Song already liked.");
+				   }
+			   }
+		
+		   }
+		 
 		   
 		   int likes = song.getLikes();
 		   
 		   likes++;
 		   
 		   song.setLikes(likes);
+		   Reaction reaction;
+		   if(user.getReaction()==null)
+		   {
+			   reaction = new Reaction();
+			   
+			   reaction.setLikeSong(true);
+			   reaction.setUserId(user.getUserId());
+			   reaction.getSongs().add(song);
+			   reaction.setUser(user);
+		   }
+		   else
+		   {
+			   reaction = user.getReaction();
+			   reaction.getSongs().add(song);
+		   }
 		   
-		   Reaction reaction = new Reaction();
 		   
-		   reaction.setLikeSong(true);
-		   reaction.setUserId(user.getUserId());
-		   reaction.getSongs().add(song);
 		   
 		   songDao.save(song);
 		   
+		   user.setReaction(reaction);
+		   userDao.save(user);
+		   
 		   reactionDao.save(reaction);
+		   
+		  
 		   
 		   return user.getFirstName()+" is like the song "+song.getName();
 		   
@@ -93,6 +127,32 @@ public class ReactionServiceImpl implements ReactionService {
 		{
 		   Song song  = optSong.get();
 		   
+		   if(user.getReaction()!=null)
+		   {
+			   int count=0;
+
+			   //System.out.println("+++++++++++++++++++++++++++++");
+			   for(Song s : user.getReaction().getSongs())
+			   {
+				   if(s.getSongId()!=song.getSongId())
+				   {
+					   count++;
+//					   
+				   }
+			   }
+			   
+			   if(count==user.getReaction().getSongs().size())
+			   {
+//				   System.out.println("*** user already dislike ************************");
+				   throw new ReactionException("Song already disliked.");
+			   }
+		
+		   }
+		   else
+		   {
+			   throw new ReactionException("you are not liking any song.");
+		   }
+		   
 		   int likes = song.getLikes();
 		   
 		   likes--;
@@ -101,8 +161,8 @@ public class ReactionServiceImpl implements ReactionService {
 		   
 		   Reaction reaction = user.getReaction();
 		   
-		   reaction.setLikeSong(false);
-		   reaction.setUserId(user.getUserId());
+		  // reaction.setLikeSong(false);
+		 //  reaction.setUserId(user.getUserId());
 		   List<Song> songs = reaction.getSongs();
 		   int ind =0;
 		   for(Song s: songs)
@@ -118,6 +178,8 @@ public class ReactionServiceImpl implements ReactionService {
 		   }
 		   
 		   songs.remove(ind);
+		   
+		   
 		   
 		   songDao.save(song);
 		   
