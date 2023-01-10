@@ -28,6 +28,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -74,7 +75,7 @@ public class Song {
 	private List<Comment> comments = new ArrayList<>();
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(cascade =  CascadeType.ALL)
 	private Chennal chennal;
 	
     private LocalDateTime uploadTime;

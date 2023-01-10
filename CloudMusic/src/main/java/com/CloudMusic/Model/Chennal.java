@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,7 +42,7 @@ public class Chennal {
 	
 	private LocalDateTime updateTime;
 	
-	@OneToMany
+	@OneToMany(cascade =  CascadeType.ALL)
 	private List<Song> songs = new ArrayList<>();
 
 }

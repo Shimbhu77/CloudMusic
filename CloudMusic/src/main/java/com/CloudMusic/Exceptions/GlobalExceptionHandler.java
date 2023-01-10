@@ -24,6 +24,18 @@ public class GlobalExceptionHandler {
 		
 	}
 	
+	@ExceptionHandler(PlayListException.class)
+	public ResponseEntity<ErrorDetails> myExceptionHandler(PlayListException pe , WebRequest req)
+	{
+		ErrorDetails err  = new ErrorDetails();
+		err.setDescription(req.getDescription(false));
+		err.setTimestamp(LocalDateTime.now());
+		err.setMessage(pe.getMessage());
+		
+		return new ResponseEntity<ErrorDetails>(err,HttpStatus.BAD_REQUEST);
+		
+	}
+	
 	@ExceptionHandler(ReactionException.class)
 	public ResponseEntity<ErrorDetails> myExceptionHandler(ReactionException pe , WebRequest req)
 	{
