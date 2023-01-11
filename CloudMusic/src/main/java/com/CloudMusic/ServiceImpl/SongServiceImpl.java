@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,14 +102,28 @@ public class SongServiceImpl implements SongService {
 		
 		if(newsong != null)
 		{
+			System.out.println(singers);
+			ListIterator<Singer> listItr = singers.listIterator();
 			
-			for(Singer s : singers)
+			while(listItr.hasNext())
 			{
-//				System.out.println(s.toString());
-				s.getSongs().add(newsong);
+//				Singer s = listItr.next();
 				
-				singerDao.save(s);
+				listItr.next().getSongs().add(newsong);
+
+//				s.getSongs().add(newsong);
+//				
+//				singerDao.save(s);
+				
 			}
+			
+//			for(Singer s : singers)
+//			{
+////				System.out.println(s.toString());
+//				s.getSongs().add(newsong);
+//				
+//				singerDao.save(s);
+//			}
 			
 			category.getSongs().add(newsong);
 			

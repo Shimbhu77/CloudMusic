@@ -49,6 +49,7 @@ public class ChennalServiceImpl implements ChennalService {
 		chennal.setDescription(dto.getDescription());
 		chennal.setCreationTime(LocalDateTime.now());
 		chennal.setUpdateTime(LocalDateTime.now());
+		chennal.setSubscribers(0);
 		chennal.setUser(user);
 		
 		user.setChennal(chennal);
@@ -89,7 +90,7 @@ public class ChennalServiceImpl implements ChennalService {
 	}
 
 	@Override
-	public Chennal deleteChennal(Integer id) throws ChennalException, UserException {
+	public Chennal deleteChennal() throws ChennalException, UserException {
 		
 		User user = uService.getCurrentLoggedInUser();
 		
@@ -97,14 +98,12 @@ public class ChennalServiceImpl implements ChennalService {
 		{
 			throw new UserException("Please login first for creating chennal");
 		}
+	
 		
-		//Optional<Chennal> optchennal = chDao.findById(user.getChennal().getChannelId());
+        Chennal chennal = user.getChennal();
 		
-//		if(optchennal.isPresent())
+//		if(chennal!=null)
 //		{
-//			Chennal chennal = optchennal.get();
-//			
-//			chDao.delete(chennal);
 //			
 //			return chennal;
 //		}
@@ -113,7 +112,7 @@ public class ChennalServiceImpl implements ChennalService {
 	}
 
 	@Override
-	public Chennal viewChennal(Integer id) throws ChennalException, UserException {
+	public Chennal viewMyChennal() throws ChennalException, UserException {
 		
 
 		User user = uService.getCurrentLoggedInUser();
@@ -123,11 +122,11 @@ public class ChennalServiceImpl implements ChennalService {
 			throw new UserException("Please login first for creating chennal");
 		}
 		
-		Optional<Chennal> optchennal = chDao.findById(user.getChennal().getChannelId());
+//		Optional<Chennal> optchennal = chDao.findById(user.getChennal().getChannelId());
+		Chennal chennal = user.getChennal();
 		
-		if(optchennal.isPresent())
+		if(chennal!=null)
 		{
-			Chennal chennal = optchennal.get();
 			
 			return chennal;
 		}

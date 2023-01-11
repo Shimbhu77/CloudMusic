@@ -82,4 +82,8 @@ public class Song {
 	
 	private LocalDateTime updateTime;
 	
+	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<PlayList> playlists = new ArrayList<>();
+	
 }

@@ -1,5 +1,7 @@
 package com.CloudMusic.Controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +11,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.CloudMusic.Exceptions.ChennalException;
 import com.CloudMusic.Exceptions.UserException;
+import com.CloudMusic.Model.Chennal;
 import com.CloudMusic.Model.User;
 import com.CloudMusic.Model.DTO.UserDTO1;
 import com.CloudMusic.Model.DTO.UserDTO2;
@@ -31,7 +37,7 @@ public class UserController {
 	@Autowired
 	private UserDao uDao;
 	
-	@PostMapping("/cloudmusic/home/register")
+	@PostMapping("/cloudmusic/user/register")
 	public ResponseEntity<User> registerUser(@Valid @RequestBody UserDTO1 userDto) throws UserException 
 	{
 
@@ -40,7 +46,7 @@ public class UserController {
 		return new ResponseEntity<User>(user,HttpStatus.CREATED);
 	}
 	
-	@PostMapping("/cloudmusic/home/update-account")
+	@PutMapping("/cloudmusic/home/update-account")
 	public ResponseEntity<User> updateMyAccount(@Valid @RequestBody UserDTO3 userDto) throws UserException 
 	{
 		
@@ -49,7 +55,7 @@ public class UserController {
 		return new ResponseEntity<User>(user,HttpStatus.ACCEPTED);
 	}
 	
-	@PostMapping("/cloudmusic/home/update-password")
+	@PutMapping("/cloudmusic/home/update-password")
 	public ResponseEntity<User> updateMyPassword(@Valid @RequestBody UserDTO2 userDto) throws UserException 
 	{
 		
@@ -67,11 +73,20 @@ public class UserController {
 		return new ResponseEntity<User>(user,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/cloudmusic/home")
-	public ResponseEntity<String> userWelcome()
+	@GetMapping("/cloudmusic/home/chennal-subscribe/{id}")
+	public ResponseEntity<String> subscribeChennal(@PathVariable("id") Integer id) throws ChennalException, UserException
 	{
 
-		String p = "Welcome to CloudMusic Website";
+		String p = uService.subscribeChennal(id);
+		
+		return new ResponseEntity<String>(p,HttpStatus.OK);
+	}
+	
+	@GetMapping("/cloudmusic/home/chennal-unsubscribe/{id}")
+	public ResponseEntity<String> unsubscribeChennal(@PathVariable("id") Integer id) throws ChennalException, UserException
+	{
+		
+		String p = uService.unsubscribeChennal(id);
 		
 		return new ResponseEntity<String>(p,HttpStatus.OK);
 	}
@@ -85,6 +100,14 @@ public class UserController {
 		return new ResponseEntity<String>(p,HttpStatus.OK);
 	}
 	
+	@GetMapping("/cloudmusic/home/view-All-chennals")
+	public ResponseEntity<List<Chennal>> viewAllChennals() throws UserException, ChennalException 
+	{
+		
+		List<Chennal> chennals = uService.allChennals();
+		
+		return new ResponseEntity<List<Chennal>>(chennals,HttpStatus.ACCEPTED);
+	}
 	
 	@GetMapping("/cloudmusic/user/portal")
 	public ResponseEntity<String> loginUser()

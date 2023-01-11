@@ -47,20 +47,20 @@ public class ChennalController {
 		return new ResponseEntity<Chennal>(chennal,HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/cloudmusic/developer/chennals/{id}")
-	public ResponseEntity<Chennal> deleteChennal(@PathVariable("id") Integer id) throws  CategoryException, ChennalException, UserException 
+	@DeleteMapping("/cloudmusic/developer/chennals")
+	public ResponseEntity<Chennal> deleteChennal() throws  CategoryException, ChennalException, UserException 
 	{
 
-		Chennal chennal = chService.deleteChennal(id);
+		Chennal chennal = chService.deleteChennal();
 		
 		return new ResponseEntity<Chennal>(chennal,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/cloudmusic/developer/chennals/chennal/{id}")
-	public ResponseEntity<Chennal> viewChennal(@PathVariable("id") Integer id) throws  CategoryException, ChennalException, UserException 
+	@GetMapping("/cloudmusic/developer/chennals/chennal")
+	public ResponseEntity<Chennal> viewChennal() throws  CategoryException, ChennalException, UserException 
 	{
 
-		Chennal chennal = chService.viewChennal(id);
+		Chennal chennal = chService.viewMyChennal();
 		
 		return new ResponseEntity<Chennal>(chennal,HttpStatus.ACCEPTED);
 	}

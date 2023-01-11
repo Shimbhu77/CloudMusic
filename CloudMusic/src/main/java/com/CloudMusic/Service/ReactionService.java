@@ -10,7 +10,7 @@ import com.CloudMusic.Model.Song;
 public interface ReactionService {
 
 	public String likeSong(Integer id) throws ReactionException, UserException, SongException;
-	public String dislikeSong(Integer id) throws ReactionException ,UserException ,SongException;
+	public String removelikeSong(Integer id) throws ReactionException ,UserException ,SongException;
 	public List<Song> viewAlllikeSongList() throws ReactionException,UserException;
 	
 }

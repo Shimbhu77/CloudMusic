@@ -112,7 +112,7 @@ public class ReactionServiceImpl implements ReactionService {
 	}
 
 	@Override
-	public String dislikeSong(Integer songId) throws ReactionException, UserException, SongException {
+	public String removelikeSong(Integer songId) throws ReactionException, UserException, SongException {
 		
 		User user = userService.getCurrentLoggedInUser();
 		
