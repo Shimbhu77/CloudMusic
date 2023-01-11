@@ -45,7 +45,7 @@ public class LikeController {
 	public ResponseEntity<String> dislikeSong(@PathVariable("songId") Integer songId) throws  ReactionException, UserException, SongException 
 	{
 
-		String string = rService.dislikeSong(songId);
+		String string = rService.removelikeSong(songId);
 		
 		return new ResponseEntity<String>(string,HttpStatus.ACCEPTED);
 	}

@@ -18,10 +18,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Chennal {
@@ -37,6 +40,8 @@ public class Chennal {
 	private String chennalName;
 	
 	private String description;
+	
+	private Integer subscribers;
 	
 	private LocalDateTime CreationTime;
 	

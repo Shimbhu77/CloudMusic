@@ -16,10 +16,13 @@ import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Singer {
@@ -37,5 +40,12 @@ public class Singer {
 	
 	@ManyToMany(cascade = CascadeType.ALL)
 	private List<Song> songs  = new LinkedList<>();
+
+	@Override
+	public String toString() {
+		return "Singer [singerId=" + singerId + ", fullName=" + fullName + ", bio=" + bio + "]";
+	}
+	
+	
 	
 }

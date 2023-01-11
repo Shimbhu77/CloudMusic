@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.CloudMusic.Exceptions.PlayListException;
+import com.CloudMusic.Exceptions.SongException;
 import com.CloudMusic.Exceptions.UserException;
 import com.CloudMusic.Model.PlayList;
 import com.CloudMusic.Model.Song;
@@ -58,7 +59,7 @@ public class PlayListServiceImpl implements PlayListService {
 		
 		user.getPlayLists().add(playList);
 		
-		userDao.save(user);
+//		userDao.save(user);
 		
 		return pDao.save(playList);
 		
@@ -89,6 +90,15 @@ public class PlayListServiceImpl implements PlayListService {
     			 if(song.isPresent())
     			 {
     				 PlayList p = playLists.get();
+    				 
+    				 for(Song x : p.getSongs())
+    				 {
+    					 if(x.getSongId()==song.get().getSongId())
+    					 {
+    						 throw new PlayListException("Song already added in your playlist.");
+    					 }
+    				 }
+    				 
     				 p.getSongs().add(song.get());
     				 
     				 return pDao.save(p);
