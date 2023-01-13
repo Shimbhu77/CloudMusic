@@ -1,4 +1,4 @@
-# CloudMusic Application  
+# CloudMusic Application : Music service company
 
 # Objevtive:
 
