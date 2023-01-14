@@ -18,11 +18,12 @@ public class SecurityConfig {
 		  auth.antMatchers("/cloudmusic/home/update-account","/cloudmusic/home/update-password","/cloudmusic/user/portal","/cloudmusic/home/view-my-account").authenticated()
 		  .antMatchers("/cloudmusic/admin/portal").hasRole("Admin")
 		  .antMatchers("/cloudmusic/home/**","/cloudmusic/developer/**").authenticated()
-		  .antMatchers("/cloudmusic/home","/cloudmusic/user/register").permitAll()
+		  .antMatchers("/cloudmusic/home","/cloudmusic/user/register","/music/**").permitAll()
 				).csrf().disable().httpBasic();
 		
 		return http.build();
 	}
+	
 	
 	@Bean
 	PasswordEncoder passwordEncoder()

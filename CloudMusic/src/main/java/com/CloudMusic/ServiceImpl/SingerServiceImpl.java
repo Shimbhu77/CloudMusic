@@ -59,6 +59,7 @@ public class SingerServiceImpl implements SingerService{
 		{
 			Singer singer = optSinger.get();
 			
+			System.out.println(singer);
 			singerDao.delete(singer);
 			
 			return singer;

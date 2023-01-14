@@ -58,4 +58,30 @@ public class SongController {
 	                .contentType(MediaType.valueOf("video/mp4"))
 	                .body(song);
 	}
+	
+	@GetMapping("/cloudmusic/musics/{name}")
+	public ResponseEntity<byte[]> viewSongs(@PathVariable("name") String name)throws UserException, IllegalStateException, SongException, IOException 
+	{
+		
+		byte[] song = songService.viewSong(name);
+		
+		System.out.println("song is written and view *************++++++++++++^^^^^^^^^^^^");
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.contentType(MediaType.valueOf("video/mp4"))
+				.body(song);
+	}
+	
+	@GetMapping("/music/{name}")
+	public ResponseEntity<byte[]> viewSongwithoutlogin(@PathVariable("name") String name)throws UserException, IllegalStateException, SongException, IOException 
+	{
+		
+		byte[] song = songService.viewSong(name);
+		
+		System.out.println("song is written and view *************++++++++++++^^^^^^^^^^^^");
+		
+		return ResponseEntity.status(HttpStatus.OK)
+				.contentType(MediaType.valueOf("video/mp4"))
+				.body(song);
+	}
 }

@@ -2,6 +2,8 @@ package com.CloudMusic.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +40,7 @@ public class UserController {
 	@Autowired
 	private UserDao uDao;
 	
+	
 	@PostMapping("/cloudmusic/user/register")
 	public ResponseEntity<User> registerUser(@Valid @RequestBody UserDTO1 userDto) throws UserException 
 	{
@@ -44,6 +48,21 @@ public class UserController {
 		User user = uService.registerUser(userDto);
 		
 		return new ResponseEntity<User>(user,HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/cloudmusic/user/logout")
+	public ResponseEntity<String> logoutUser() throws UserException 
+	{
+		
+		SecurityContext sc = SecurityContextHolder.getContext();
+		
+		 Authentication authentication =  sc.getAuthentication();
+		 
+		 sc.setAuthentication(null);
+		 
+		 String string = "logout secussfully.";
+		
+		return new ResponseEntity<String>(string,HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/cloudmusic/home/update-account")
@@ -105,6 +124,24 @@ public class UserController {
 	{
 		
 		List<Chennal> chennals = uService.allChennals();
+		
+		return new ResponseEntity<List<Chennal>>(chennals,HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/music/view-All-chennals")
+	public ResponseEntity<List<Chennal>> viewAllChennalwithout() throws UserException, ChennalException 
+	{
+		
+		List<Chennal> chennals = uService.allChennals();
+		
+		return new ResponseEntity<List<Chennal>>(chennals,HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/cloudmusic/home/view-my-subscribe-chennals")
+	public ResponseEntity<List<Chennal>> viewMySubscribeChennals() throws UserException, ChennalException 
+	{
+		
+		List<Chennal> chennals = uService.viewMySubscribeChennals();
 		
 		return new ResponseEntity<List<Chennal>>(chennals,HttpStatus.ACCEPTED);
 	}
