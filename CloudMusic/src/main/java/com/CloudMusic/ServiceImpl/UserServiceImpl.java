@@ -3,6 +3,9 @@ package com.CloudMusic.ServiceImpl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -87,7 +90,18 @@ public class UserServiceImpl implements UserService {
 		
 		return user;
 	}
-
+	
+	@Override
+	public String logout(HttpServletRequest request) {
+		
+	    HttpSession session = request.getSession();
+	    
+	    if (session != null) {
+	        session.invalidate();
+	    }
+	    SecurityContextHolder.clearContext();
+	    return "redirect:/login";
+	}
 
 
 	@Override
@@ -117,6 +131,14 @@ public class UserServiceImpl implements UserService {
 	    if(opt.isPresent())
 	    {
 	    	Chennal chennal = opt.get();
+	    	
+	    	for(Chennal ch : user.getChennals())
+	    	{
+	    		if(ch.getChannelId()==chennal.getChannelId())
+	    		{
+	    			throw new ChennalException("You already subscribed the chennal "+chennal.getChennalName());
+	    		}
+	    	}
 	    	
 	        int subscribers = chennal.getSubscribers();
 	        subscribers++;
@@ -152,6 +174,20 @@ public class UserServiceImpl implements UserService {
 		    if(opt.isPresent())
 		    {
 		    	Chennal chennal = opt.get();
+		    	
+		    	int count=0;
+		    	for(Chennal ch : user.getChennals())
+		    	{
+		    		if(ch.getChannelId()!=chennal.getChannelId())
+		    		{
+		    			count++;
+		    		}
+		    	}
+		    	
+		    	if(count==user.getChennals().size())
+		    	{
+		    		throw new ChennalException("You already unsubscribed the chennal "+chennal.getChennalName());
+		    	}
 		    	
 		        int subscribers = chennal.getSubscribers();
 		        subscribers--;
@@ -191,6 +227,23 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Chennal> allChennals() throws ChennalException, UserException {
 		
+//		User user = getCurrentLoggedInUser();
+//		
+//		if(user==null)
+//		{
+//			throw new UserException("please login first for viewing the songs.");
+//		}
+		
+		List<Chennal> chs = chDao.findAll();
+		
+		return chs;
+	}
+
+
+
+	@Override
+	public List<Chennal> viewMySubscribeChennals() throws ChennalException, UserException {
+
 		User user = getCurrentLoggedInUser();
 		
 		if(user==null)
@@ -198,7 +251,7 @@ public class UserServiceImpl implements UserService {
 			throw new UserException("please login first for viewing the songs.");
 		}
 		
-		List<Chennal> chs = chDao.findAll();
+		List<Chennal> chs = user.getChennals();
 		
 		return chs;
 	}

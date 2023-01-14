@@ -91,6 +91,20 @@ public class PlayListServiceImpl implements PlayListService {
     			 {
     				 PlayList p = playLists.get();
     				 
+    				    int count=0;
+    			    	for(PlayList pl : user.getPlayLists())
+    			    	{
+    			    		if(pl.getPlayListId()!=p.getPlayListId())
+    			    		{
+    			    			count++;
+    			    		}
+    			    	}
+    			    	
+    			    	if(count==user.getPlayLists().size())
+    			    	{
+    			    		throw new PlayListException("you don't have authority to delete this playlist.");
+    			    	}
+    				 
     				 for(Song x : p.getSongs())
     				 {
     					 if(x.getSongId()==song.get().getSongId())
@@ -127,7 +141,22 @@ public class PlayListServiceImpl implements PlayListService {
 		    
 		    if(playList.isPresent())
 		    {
+		    	int count=0;
 		    	PlayList p = playList.get();
+		    	for(PlayList pl : user.getPlayLists())
+		    	{
+		    		if(pl.getPlayListId()!=playList.get().getPlayListId())
+		    		{
+		    			count++;
+		    		}
+		    	}
+		    	
+		    	if(count==user.getPlayLists().size())
+		    	{
+		    		throw new PlayListException("you don't have authority to update this playlist.");
+		    	}
+		    	
+		    	
 		    	p.setPlayListName(dto.getPlayListName());
 		    	
 		    	return pDao.save(p);
@@ -153,6 +182,19 @@ public class PlayListServiceImpl implements PlayListService {
 	    if(playList.isPresent())
 	    {
 	    	PlayList p = playList.get();
+	    	int count=0;
+	    	for(PlayList pl : user.getPlayLists())
+	    	{
+	    		if(pl.getPlayListId()!=playList.get().getPlayListId())
+	    		{
+	    			count++;
+	    		}
+	    	}
+	    	
+	    	if(count==user.getPlayLists().size())
+	    	{
+	    		throw new PlayListException("you don't have authority to delete this playlist.");
+	    	}
 	        
 	    	List<PlayList> list = user.getPlayLists();
 	    	int ind=0;
@@ -169,7 +211,8 @@ public class PlayListServiceImpl implements PlayListService {
 	    		}
 	    	}
 	    	list.remove(ind);
-	    	pDao.delete(p);
+	    	//pDao.delete(p);
+	    	userDao.save(user);
 	    	
 	    	return p;
 	    }
@@ -194,6 +237,20 @@ public class PlayListServiceImpl implements PlayListService {
 	    if(playList.isPresent())
 	    {
 	    	PlayList p = playList.get();
+	    	
+	    	int count=0;
+	    	for(PlayList pl : user.getPlayLists())
+	    	{
+	    		if(pl.getPlayListId()!=playList.get().getPlayListId())
+	    		{
+	    			count++;
+	    		}
+	    	}
+	    	
+	    	if(count==user.getPlayLists().size())
+	    	{
+	    		throw new PlayListException("you don't have authority to view this playlist.");
+	    	}
 	    	
 	    	return p;
 	    }
