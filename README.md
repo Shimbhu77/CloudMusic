@@ -1,6 +1,6 @@
 # CloudMusic Application : Music service company
 
-# Objevtive:
+# Objevtive: learning and implementing skills like spring 
 
 # Modules:
 - User Module 
