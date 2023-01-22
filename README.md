@@ -2,7 +2,7 @@
 building an app for music and video streaming. in which user can create account and create channel for upload songs.here user can watch songs, like songs, add playlist, add category and add singer and subscribe chennals. 
 
 # Objevtive: 
-learning and implementing skills like spring ,JAVA,Hibernate, Postman
+learning and implementing skills like spring ,JAVA,Hibernate, Postman,spring security, Swagger ui, How to build database table for complex systems.
 
 # Modules:
 - User Module 
