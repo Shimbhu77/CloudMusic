@@ -30,7 +30,7 @@ learning and implementing skills like spring ,Java,Hibernate, Spring MVC archite
 
 - Admin/Customer registration and Login.
 
-##  Backend of The Application 
+##  Backend of The Application   
 
 - Login For customer and Admin.  
 - Stored the data In MySQL and that Can be access By only Authenticated User.
