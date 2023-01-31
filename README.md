@@ -5,7 +5,7 @@ building an app for music and video streaming. in which user can create account 
 learning and implementing skills like spring ,Java,Hibernate, Spring MVC architechure, Postman,spring security, Swagger ui, How to build database table for complex systems.Also Using spring security through which use Session management of User.   
 
 # Modules:
-- User Module 
+- User Module    
 - Singer Module
 - Song Module
 - Login Module
