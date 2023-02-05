@@ -27,7 +27,7 @@ learning and implementing skills like spring ,Java,Hibernate, Spring MVC archite
 
 
 ## Features And Functinalities:
-
+    
 - Admin/Customer registration and Login.
 
 ##  Backend of The Application   
