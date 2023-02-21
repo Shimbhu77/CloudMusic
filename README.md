@@ -68,9 +68,9 @@ Before running the API server, update the database config inside the application
 
 Link: http://localhost:8888/swagger-ui/
 
-## Deployed Project Presentation Video
+## Deployed Project 
 
-Link: drive link soon
+Link: https://cloudmusic-production.up.railway.app/swagger-ui/index.html#/
 
 ## Roles & Responsibilities :-
 
