@@ -12,6 +12,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.CloudMusic.Exceptions.SongException;
 import com.CloudMusic.Exceptions.UserException;
@@ -190,6 +191,20 @@ public class SongServiceImpl implements SongService {
 		}
 		
 		throw new SongException("No song found with this nane : "+name);
+	}
+	
+	@Override
+	public List<Song> viewSongWithoutlogin() throws SongException, IOException {
+		
+		List<Song> list=songDao.findAll();
+		for(Song i:list) {
+			String download=ServletUriComponentsBuilder.fromCurrentContextPath().path("/CloudMusicDatabase/").path(i.getName()).toUriString();
+
+			i.setFilePath(download);
+		}
+       return list;
+		
+		
 	}
 
 }

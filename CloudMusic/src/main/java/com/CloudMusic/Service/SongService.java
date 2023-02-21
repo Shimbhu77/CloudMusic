@@ -19,6 +19,7 @@ public interface SongService {
 	public Song deleteSong(Integer id) throws SongException;
 	public Song makeSongPrivate(Integer id) throws SongException;
 	public List<Song> viewAllSongs() throws SongException;
+	public List<Song> viewSongWithoutlogin() throws SongException, IOException;
 	public byte[] viewSong(String name) throws SongException, IOException;
 	
 }

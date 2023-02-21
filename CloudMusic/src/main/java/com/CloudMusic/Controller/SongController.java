@@ -1,6 +1,7 @@
 package com.CloudMusic.Controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.validation.Valid;
 import javax.websocket.server.PathParam;
@@ -23,6 +24,7 @@ import com.CloudMusic.Model.Song;
 import com.CloudMusic.Model.User;
 import com.CloudMusic.Model.DTO.SongDTO1;
 import com.CloudMusic.Model.DTO.UserDTO1;
+import com.CloudMusic.Repository.SongDao;
 import com.CloudMusic.Service.SongService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -31,6 +33,9 @@ public class SongController {
 
 	@Autowired
 	private SongService songService;
+	
+	@Autowired
+	private SongDao songDao;
 	
 	@Autowired
 	private ObjectMapper mapper;
@@ -83,5 +88,14 @@ public class SongController {
 		return ResponseEntity.status(HttpStatus.OK)
 				.contentType(MediaType.valueOf("video/mp4"))
 				.body(song);
+	}
+	@GetMapping("/music")
+	public ResponseEntity<List<Song>> viewAllSongwithoutlogin()throws UserException, IllegalStateException, SongException, IOException 
+	{
+		
+		List<Song> song = songService.viewSongWithoutlogin();		
+		System.out.println("song is All and view *************++++++++++++^^^^^^^^^^^^");
+		
+		return new ResponseEntity<List<Song>>(song,HttpStatus.OK);
 	}
 }

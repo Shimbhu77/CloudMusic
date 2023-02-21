@@ -50,20 +50,20 @@ public class UserController {
 		return new ResponseEntity<User>(user,HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/cloudmusic/user/logout")
-	public ResponseEntity<String> logoutUser() throws UserException 
-	{
-		
-		SecurityContext sc = SecurityContextHolder.getContext();
-		
-		 Authentication authentication =  sc.getAuthentication();
-		 
-		 sc.setAuthentication(null);
-		 
-		 String string = "logout secussfully.";
-		
-		return new ResponseEntity<String>(string,HttpStatus.CREATED);
-	}
+//	@GetMapping("/cloudmusic/user/logout")
+//	public ResponseEntity<String> logoutUser() throws UserException 
+//	{
+//		
+//		SecurityContext sc = SecurityContextHolder.getContext();
+//		
+//		 Authentication authentication =  sc.getAuthentication();
+//		 
+//		 sc.setAuthentication(null);
+//		 
+//		 String string = "logout secussfully.";
+//		
+//		return new ResponseEntity<String>(string,HttpStatus.CREATED);
+//	}
 	
 	@PutMapping("/cloudmusic/home/update-account")
 	public ResponseEntity<User> updateMyAccount(@Valid @RequestBody UserDTO3 userDto) throws UserException 
@@ -110,14 +110,14 @@ public class UserController {
 		return new ResponseEntity<String>(p,HttpStatus.OK);
 	}
 	
-	@GetMapping("/cloudmusic/admin/portal")
-	public ResponseEntity<String> loginAdmin() 
-	{
-
-		String p = "Welcome to CloudMusic Admin portal";
-		
-		return new ResponseEntity<String>(p,HttpStatus.OK);
-	}
+//	@GetMapping("/cloudmusic/admin/portal")
+//	public ResponseEntity<String> loginAdmin() 
+//	{
+//
+//		String p = "Welcome to CloudMusic Admin portal";
+//		
+//		return new ResponseEntity<String>(p,HttpStatus.OK);
+//	}
 	
 	@GetMapping("/cloudmusic/home/view-All-chennals")
 	public ResponseEntity<List<Chennal>> viewAllChennals() throws UserException, ChennalException 
@@ -129,9 +129,16 @@ public class UserController {
 	}
 	
 	@GetMapping("/music/view-All-chennals")
-	public ResponseEntity<List<Chennal>> viewAllChennalwithout() throws UserException, ChennalException 
+	public ResponseEntity<List<Chennal>> viewAllChennalwithoutlogin() throws UserException, ChennalException 
 	{
-		
+//		System.out.println("**********************  hello ");
+//		System.out.println("**********************  hello ");
+//		System.out.println("**********************  hello ");
+//		System.out.println("**********************  hello ");
+//		System.out.println("**********************  hello ");
+//		System.out.println("**********************  hello ");
+//		System.out.println("**********************  hello ");
+//		System.out.println("**********************  hello ");
 		List<Chennal> chennals = uService.allChennals();
 		
 		return new ResponseEntity<List<Chennal>>(chennals,HttpStatus.ACCEPTED);
@@ -146,19 +153,26 @@ public class UserController {
 		return new ResponseEntity<List<Chennal>>(chennals,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/cloudmusic/user/portal")
-	public ResponseEntity<String> loginUser()
-	{
-
-       SecurityContext sc =SecurityContextHolder.getContext();
-		
-		
-		Authentication auth=sc.getAuthentication();
-		
-		String p = "Welcome to CloudMusic user portal : "+auth.getName();
-		
-		
-		
-		return new ResponseEntity<String>(p,HttpStatus.OK);
-	}
+//	@GetMapping("/music/portal")
+//	public ResponseEntity<String> loginUser()
+//	{
+////
+////       SecurityContext sc =SecurityContextHolder.getContext();
+////		
+////		
+////		Authentication auth=sc.getAuthentication();
+////		
+////		System.out.println("+++++++++++++++++++++++");
+////		System.out.println("+++++++++++++++++++++++");
+////		System.out.println("+++++++++++++++++++++++");
+////		System.out.println("+++++++++++++++++++++++");
+////		System.out.println("+++++++++++++++++++++++");
+////		System.out.println("===========================");
+//		
+//		String p = "Welcome to CloudMusic user portal : ";//+auth.getName();
+//		
+//		
+//		
+//		return new ResponseEntity<String>(p,HttpStatus.OK);
+//	}
 }
