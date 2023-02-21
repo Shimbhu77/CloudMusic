@@ -14,7 +14,7 @@ public class SecurityConfig {
 	@Bean
     SecurityFilterChain mySecurity(HttpSecurity http) throws Exception
 	{
-		http.authorizeHttpRequests( (auth) ->
+		http.headers().frameOptions().sameOrigin().and().authorizeHttpRequests( (auth) ->
 		  auth.antMatchers("/cloudmusic/home/update-account","/cloudmusic/home/update-password","/cloudmusic/user/portal","/cloudmusic/home/view-my-account").authenticated()
 		  .antMatchers("/cloudmusic/admin/portal").hasRole("Admin")
 		  .antMatchers("/cloudmusic/home/**","/cloudmusic/developer/**").authenticated()
